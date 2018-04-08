@@ -5,7 +5,6 @@
  */
 package Model;
 
-import java.util.Objects;
 
 /**
  *
@@ -60,16 +59,17 @@ public class Poligono {
     }
     
     public Integer[] quickSort(Integer[] list){
-        if(list.length == 1) return list;
         
-        Integer pivot = list[list.length-1];
+        if(list.length == 1)return list;
+        
+        Integer pivot = list[list.length - 1]; //no llega a cero
         Integer[] right;
         Integer[] left;
         
         Integer current = 0;
         Integer wall = 0;
         Integer aux;
-        
+ 
         while(current < (list.length-1)){
             if(list[current] < pivot){//when the value is less than the pivot, swap
                 aux = list[current];
@@ -80,8 +80,8 @@ public class Poligono {
             current++;
         }
                 
-        //cuando current = pivote, de
-        if(! Objects.equals(list[wall], pivot) ){
+        //cuando current = pivote, de, CUANDO THE WALL NO SEA el pivote, pero se refiere a la posicion, NO al valor
+        if(wall!=(list.length-1)){//list[wall] != pivot
             aux = list[current];
             list[current] = list[wall];
             list[wall] = aux;
@@ -104,8 +104,10 @@ public class Poligono {
             i++;
         }
         
-        quickSort(left);
-        quickSort(right);
+        
+        if(left.length!=0) left = quickSort(left);            
+       
+        if(right.length !=0 )right = quickSort(right);
                  
         i = 0;
         
@@ -114,7 +116,7 @@ public class Poligono {
             i++;
         }
         k=0;
-        while(i<list.length){
+        while(i<list.length){//longitud
             list[i] = right[k];
             k++; 
             i++;
@@ -149,3 +151,4 @@ public class Poligono {
         
     }
 }
+
